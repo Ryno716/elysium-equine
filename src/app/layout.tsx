@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://elysium-equine.netlify.app/"),
   title: "Elysium Equine | Premier Equestrian Facility in Langley, BC",
   description: "Elysium Equine offers top-tier horse training, boarding, and riding in Langley, BC. Join our community of passionate riders and experience world-class care for your horse.",
   openGraph: {
