@@ -19,7 +19,7 @@ export default function FacilityPage() {
     }, 4000); // Change image every 4 seconds
 
     return () => clearInterval(timer); // Clean up on unmount
-  }, [images.length]);
+  }, []); // Removed images.length dependency as it's static
 
   // Manual dot navigation (resets timer)
   const goToIdx = (i: number) => setIdx(i);

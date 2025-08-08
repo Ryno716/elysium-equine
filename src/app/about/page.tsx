@@ -13,7 +13,7 @@ const carouselImages = [
 // Testimonials
 const testimonials = [
   { name: "Sophia M.", text: "My horse has never been happier. The care and training here are unmatched." },
-  { name: "James P.", text: "The best equestrian facility I've ever been to. Highly recommend!" },
+  { name: "James P.", text: "The best equestrian facility I&apos;ve ever been to. Highly recommend!" },
 ];
 
 // Team/horse members (use your own images/names if you wish)
@@ -90,7 +90,7 @@ export default function AboutPage() {
         <div className="flex flex-col md:flex-row gap-8 w-full max-w-4xl justify-center">
           {testimonials.map((t, i) => (
             <div key={i} className="bg-amber-50/95 backdrop-blur-md rounded-xl shadow-xl p-6 text-center border-l-4 border-amber-400 flex-1 min-w-[240px]">
-              <p className="italic text-stone-800 mb-2">"{t.text}"</p>
+              <p className="italic text-stone-800 mb-2">&ldquo;{t.text}&rdquo;</p>
               <span className="block text-amber-800 font-bold">- {t.name}</span>
             </div>
           ))}
