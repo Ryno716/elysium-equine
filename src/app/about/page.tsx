@@ -1,7 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import Navigation from "../../components/Navigation";
+import Footer from "../../components/Footer";
+import PageTransition from "../../components/PageTransition";
+import ScrollReveal from "../../components/ScrollReveal";
+import AnimatedCounter from "../../components/AnimatedCounter";
+import TestimonialsCarousel, { Testimonial } from "../../components/TestimonialsCarousel";
+import WriteReviewModal from "../../components/WriteReviewModal";
 
 // Carousel images
 const carouselImages = [
@@ -10,10 +16,40 @@ const carouselImages = [
   { src: "/images/about3.jpg", alt: "Sunrise over Elysium" },
 ];
 
-// Testimonials
-const testimonials = [
-  { name: "Sophia M.", text: "My horse has never been happier. The care and training here are unmatched." },
-  { name: "James P.", text: "The best equestrian facility I&apos;ve ever been to. Highly recommend!" },
+// Enhanced Testimonials with ratings
+const testimonialsData: Testimonial[] = [
+  {
+    id: 1,
+    name: "Sophia Martinez",
+    role: "Horse Owner",
+    rating: 5,
+    text: "My horse has never been happier. The care and training here are unmatched. The staff truly understands the bond between horse and rider.",
+    date: "October 2025",
+  },
+  {
+    id: 2,
+    name: "James Peterson",
+    role: "Riding Student",
+    rating: 5,
+    text: "The best equestrian facility I've ever been to. Highly recommend! The instructors are patient, knowledgeable, and genuinely care about your progress.",
+    date: "September 2025",
+  },
+  {
+    id: 3,
+    name: "Emily Chen",
+    role: "Boarding Client",
+    rating: 5,
+    text: "Outstanding facilities and professional staff. My horse receives excellent care and I have complete peace of mind. The boarding options are flexible and affordable.",
+    date: "August 2025",
+  },
+  {
+    id: 4,
+    name: "Michael Thompson",
+    role: "Competition Rider",
+    rating: 5,
+    text: "Training here has taken my riding to the next level. The coaching is world-class and the arena facilities are perfect for competition preparation.",
+    date: "July 2025",
+  },
 ];
 
 // Team/horse members (use your own images/names if you wish)
@@ -27,6 +63,7 @@ const team = [
 export default function AboutPage() {
   // Carousel state
   const [carouselIdx, setCarouselIdx] = useState(0);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
 
   // Auto-advance the carousel every 5 seconds
   useEffect(() => {
@@ -40,9 +77,11 @@ export default function AboutPage() {
   const goToIdx = (i: number) => setCarouselIdx(i);
 
   return (
-    <main className="relative min-h-screen flex flex-col bg-[#181717] overflow-x-hidden">
-      {/* Hero Carousel */}
-      <section className="relative w-full h-[55vh] md:h-[70vh] flex items-center justify-center overflow-hidden">
+    <PageTransition>
+      <main className="relative min-h-screen flex flex-col bg-[#181717] overflow-x-hidden">
+        <Navigation />
+        {/* Hero Carousel */}
+        <section className="relative w-full h-[55vh] md:h-[70vh] flex items-center justify-center overflow-hidden">
         <Image
           src={carouselImages[carouselIdx].src}
           alt={carouselImages[carouselIdx].alt}
@@ -86,15 +125,25 @@ export default function AboutPage() {
             We invite you to become a part of our story, whether you’re a seasoned competitor, a first-time rider, or just love horses.
           </p>
         </div>
-        {/* Testimonials */}
-        <div className="flex flex-col md:flex-row gap-8 w-full max-w-4xl justify-center">
-          {testimonials.map((t, i) => (
-            <div key={i} className="bg-amber-50/95 backdrop-blur-md rounded-xl shadow-xl p-6 text-center border-l-4 border-amber-400 flex-1 min-w-[240px]">
-              <p className="italic text-stone-800 mb-2">&ldquo;{t.text}&rdquo;</p>
-              <span className="block text-amber-800 font-bold">- {t.name}</span>
+        
+        {/* Testimonials Carousel */}
+        <ScrollReveal>
+          <div className="w-full max-w-5xl mt-16 mb-12">
+            <h2 className="text-4xl font-bold text-amber-400 text-center mb-3">What Our Clients Say</h2>
+            <p className="text-gray-300 text-center mb-8">Hear from riders who have experienced Elysium Equine</p>
+            <TestimonialsCarousel testimonials={testimonialsData} />
+            
+            {/* Write Review Button */}
+            <div className="text-center mt-8">
+              <button
+                onClick={() => setIsReviewModalOpen(true)}
+                className="px-8 py-3 bg-amber-400 hover:bg-amber-500 text-black font-bold rounded-lg transition-all hover:scale-105"
+              >
+                Write a Review
+              </button>
             </div>
-          ))}
-        </div>
+          </div>
+        </ScrollReveal>
       </section>
 
       {/* Meet the Team or Horses */}
@@ -122,13 +171,39 @@ export default function AboutPage() {
             </div>
           ))}
         </div>
-        <Link
-          href="/"
-          className="mt-12 px-6 py-2 bg-transparent border-2 border-amber-400 rounded-lg text-amber-400 hover:bg-amber-400 hover:text-white font-semibold transition"
-        >
-          Back to Home
-        </Link>
+
+        {/* Statistics Section */}
+        <ScrollReveal>
+          <section className="bg-[#131313] py-12 px-4">
+            <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              <div className="text-white">
+                <AnimatedCounter value={25} suffix="+" className="text-5xl font-bold text-amber-400 block mb-2" />
+                <p className="text-gray-300">Years Experience</p>
+              </div>
+              <div className="text-white">
+                <AnimatedCounter value={150} suffix="+" className="text-5xl font-bold text-amber-400 block mb-2" />
+                <p className="text-gray-300">Happy Clients</p>
+              </div>
+              <div className="text-white">
+                <AnimatedCounter value={50} suffix="+" className="text-5xl font-bold text-amber-400 block mb-2" />
+                <p className="text-gray-300">Horses Trained</p>
+              </div>
+              <div className="text-white">
+                <AnimatedCounter value={100} suffix="%" className="text-5xl font-bold text-amber-400 block mb-2" />
+                <p className="text-gray-300">Satisfaction Rate</p>
+              </div>
+            </div>
+          </section>
+        </ScrollReveal>
       </section>
+      
+      <WriteReviewModal 
+        isOpen={isReviewModalOpen}
+        onClose={() => setIsReviewModalOpen(false)}
+      />
+      
+      <Footer />
     </main>
+    </PageTransition>
   );
 }

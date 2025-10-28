@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,6 +17,12 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://elysium-equine.netlify.app/"),
   title: "Elysium Equine | Premier Equestrian Facility in Langley, BC",
   description: "Elysium Equine offers top-tier horse training, boarding, and riding in Langley, BC. Join our community of passionate riders and experience world-class care for your horse.",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Elysium Equine",
+  },
   openGraph: {
     title: "Elysium Equine | Premier Equestrian Facility in Langley, BC",
     description: "Elysium Equine offers top-tier horse training, boarding, and riding in Langley, BC. Join our community of passionate riders and experience world-class care for your horse.",
@@ -48,9 +55,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+        <meta name="theme-color" content="#059669" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <ServiceWorkerRegistration />
         {children}
       </body>
     </html>

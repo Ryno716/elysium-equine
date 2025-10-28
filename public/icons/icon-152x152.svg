@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="152" height="152" viewBox="0 0 152 152" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="152" height="152" fill="#059669"/>
+  
+  <!-- Horse silhouette (simplified) -->
+  <g transform="translate(76, 76)">
+    <path d="M -38 -22.8 
+             Q -30.400000000000002 -38 -15.200000000000001 -30.400000000000002
+             L 0 -22.8
+             L 22.8 -15.200000000000001
+             Q 30.400000000000002 0 22.8 15.200000000000001
+             L 7.6000000000000005 38
+             L -7.6000000000000005 38
+             L -22.8 22.8
+             Q -38 7.6000000000000005 -38 -22.8
+             Z" 
+          fill="#FCD34D" stroke="#000000" stroke-width="2"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="76" y="129.2" 
+        font-family="Arial, sans-serif" 
+        font-size="18.24" 
+        font-weight="bold" 
+        fill="#FCD34D" 
+        text-anchor="middle">EE</text>
+</svg>
